@@ -1,0 +1,16 @@
+{
+    "name": "Spaceship",
+    "description": "Domain registration and management module for WHMCS.",
+    "version": "0.0.1",
+    "author": "NepalCloud Host",
+    "fields": {
+        "APIKey": {
+            "type": "text",
+            "description": "Enter your Spaceship API Key."
+        },
+        "APISecret": {
+            "type": "password",
+            "description": "Enter your Spaceship API Secret."
+        }
+    }
+}
