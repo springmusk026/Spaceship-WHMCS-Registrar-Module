@@ -1,16 +1,35 @@
 {
     "name": "Spaceship",
     "description": "Domain registration and management module for WHMCS.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "NepalCloud Host",
     "fields": {
         "APIKey": {
             "type": "text",
-            "description": "Enter your Spaceship API Key."
+            "description": "Enter your Spaceship API Key.",
+            "size": 50
         },
         "APISecret": {
             "type": "password",
-            "description": "Enter your Spaceship API Secret."
+            "description": "Enter your Spaceship API Secret.",
+            "size": 50
+        },
+        "APIEndPoint": {
+            "type": "text",
+            "description": "Enter API endpoint.",
+            "default": "https://spaceship.dev/api/v1"
+        },
+        "contactId": {
+            "type": "text",
+            "description": "Enter Contact ID."
+        },
+        "Description": {
+            "type": "system",
+            "value": "<br>Don't have a Spaceship account yet? Get one here: <a href='https://www.spaceship.com/' target='_blank'>Spaceship</a>"
+        },
+        "DebugMode": {
+            "type": "yesno",
+            "description": "Tick to enable Debug mode. (this enables logging of API requests and responses in the module log)"
         }
     }
 }

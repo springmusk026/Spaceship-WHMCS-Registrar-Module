@@ -13,11 +13,26 @@ namespace Spaceship;
 
 class Utils
 {
-    public static function log($message)
+    private static $logFile = __DIR__ . '/../logs/api.log';
+
+    /**
+     * Logs messages with different levels (INFO, ERROR, DEBUG)
+     * 
+     * @param string $message The log message
+     * @param string $level The log level (INFO, ERROR, DEBUG)
+     */
+    public static function log($message, $level = 'INFO')
     {
-        $logFile = __DIR__ . '/../logs/api.log';
-        file_put_contents($logFile, date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL, FILE_APPEND);
+        try {
+            $logEntry = json_encode([
+                'timestamp' => date('Y-m-d H:i:s'),
+                'level' => strtoupper($level),
+                'message' => $message
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            
+            file_put_contents(self::$logFile, $logEntry . PHP_EOL, FILE_APPEND | LOCK_EX);
+        } catch (Exception $e) {
+            error_log('Logging failed: ' . $e->getMessage());
+        }
     }
-    
-    
 }
