@@ -42,12 +42,13 @@ function getDomainName($params) {
 
 function handleApiResponse($response) {
     
-    if (!empty($params['DebugMode'])) {
+    if (Utils::$IsDebugMode) {
         Utils::log("Debug: API Response - " . json_encode($response));
     }
     
     if (isset($response['statusCode']) && $response['statusCode'] !== 200) {
         $message = json_decode($response['message'] ?? '{}', true);
+        
         return ['error' => $message['detail'] ?? 'Unknown error'];
     }
     return null;
@@ -65,6 +66,8 @@ function getNameserversArray($params) {
 
 function initApi($params) {
     validateApiCredentials($params);
+    
+    Utils::$IsDebugMode = $params['DebugMode'];
     
     if (!empty($params['DebugMode'])) {
         Utils::log("Debug: Initializing SpaceshipAPI with endpoint: {$params['APIEndPoint']}");
@@ -310,10 +313,7 @@ function spaceship_GetEPPCode($params) {
     try {
         $api = initApi($params);
         $response = $api->getAuthCode(getDomainName($params));
-        
         if ($error = handleApiResponse($response)) return $error;
-        
-        $response = json_decode($response, true);
         return ["eppcode" => $response['authCode']];
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];

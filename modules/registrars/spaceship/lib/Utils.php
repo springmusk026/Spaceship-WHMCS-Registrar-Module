@@ -14,7 +14,7 @@ namespace Spaceship;
 class Utils
 {
     private static $logFile = __DIR__ . '/../logs/api.log';
-
+    public static $IsDebugMode = false;
     /**
      * Logs messages with different levels (INFO, ERROR, DEBUG)
      * 
