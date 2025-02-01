@@ -80,7 +80,7 @@ function initApi($params) {
 function spaceship_MetaData() {
     return [
         'DisplayName' => 'Spaceship',
-        'APIVersion' => '0.0.2',
+        'APIVersion' => '0.0.3',
     ];
 }
 
